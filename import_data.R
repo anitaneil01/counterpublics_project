@@ -53,5 +53,27 @@ View(hashtag_metoo)
 MeToo <- rbind(metoo_1.1_new, metoo_2.1_new, metoo_3.1_new)
 View(MeToo)
 
-##Step X: Import Text files
+##Step 3: Cleaning the data, i.e. removing duplicates
+##Step 3.1.: removing duplicates from the two datasets - hashtag_metoo & MeToo
+
+hashtag_metoo_1 <- as_tibble(hashtag_metoo) ##tibble for easier analysis
+hashtag_metoo_1 %>% distinct(text, .keep_all = TRUE) -> hashtag_metoo_clean
+View(hashtag_metoo_clean)
+
+MeToo_1 <- as_tibble(MeToo)
+MeToo_1
+MeToo_1 %>% distinct(text, .keep_all = TRUE) -> MeToo_clean
+MeToo_clean
+View(MeToo_clean)
+
+##Step 3.2: merging the two datasets so that I have one MeToo datafram with all the tweets - hashtag & text
+MeToo_new <- rbind(hashtag_metoo_clean, MeToo_clean)
+View(MeToo_new)
+MeToo_new <- as_tibble(MeToo_new)
+MeToo_new
+
+##Step 3.3: removing duplicates from the big dataset
+MeToo_new %>% distinct(text, .keep_all = TRUE) -> MeToo_complete
+MeToo_complete ##final MeToo data
+View(MeToo_complete)
 
